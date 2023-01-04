@@ -19,22 +19,12 @@ public class GreekGodController {
         this.repository = repository;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }
-
-    @GetMapping("/hello")
-    public String helloWorld(){
-        return "Hello World";
-    }
-
     @GetMapping("/allEnglishNames")
     public List<String> findAllEnglishNames(){
         List<Bios> bios = repository.findAll();
         List<String> allEnglishNames = new ArrayList<>();
         for (Bios bio: bios) {
-            allEnglishNames.add(bio.englishName());
+            allEnglishNames.add(bio.englishName().stripLeading());
         }
         return allEnglishNames;
     }
